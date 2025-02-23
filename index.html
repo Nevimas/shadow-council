@@ -3,142 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shadow Council - Admin Panel</title>
+    <title>Úvodní stránka - Shadow Council</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- LOGIN -->
     <div id="login-container">
-        <div class="login-container">
-            <h2>Admin Login</h2>
-            <div class="login-form">
-                <input type="text" id="username" class="input-field" placeholder="Uživatelské jméno" required><br>
-                <input type="password" id="password" class="input-field" placeholder="Heslo" required><br>
-                <button class="login-button" onclick="login()">Přihlásit</button>
-                <p class="error-message" id="error-message">Nesprávné uživatelské jméno nebo heslo!</p>
-            </div>
-        </div>
+        <h2>Admin Login</h2>
+        <input type="text" id="username" class="input-field" placeholder="Uživatelské jméno"><br>
+        <input type="password" id="password" class="input-field" placeholder="Heslo"><br>
+        <button onclick="login()">Přihlásit</button>
+        <p class="error-message" id="error-message">Nesprávné uživatelské jméno nebo heslo!</p>
     </div>
-
-    <!-- ADMIN PANEL -->
-    <div id="admin-panel" style="display:none;">
-        <nav>
-            <ul>
-                <li><a href="#leadership-section">Vedení</a></li>
-                <li><a href="#members-section">Členové</a></li>
-                <li><a href="#activity-section">Aktivity</a></li>
-                <li><a href="#finance-section">Účetnictví</a></li>
-            </ul>
-        </nav>
-
-        <!-- LEADERSHIP -->
-        <div id="leadership-section">
-            <h1>Vedení</h1>
-            <table id="leadership-table">
-                <thead>
-                    <tr>
-                        <th>Hodnost</th>
-                        <th>Jméno</th>
-                        <th>Přezdívka</th>
-                        <th>Volačka</th>
-                        <th>Datum narození</th>
-                        <th>OOC Nick</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Chief of Shadow Council</td>
-                        <td>Nicolas Ackermann</td>
-                        <td>Matthew</td>
-                        <td>Echo-1</td>
-                        <td>09/03/1995</td>
-                        <td>czipisekk</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- MEMBERS -->
-        <div id="members-section">
-            <h1>Členové</h1>
-            <table id="members-table">
-                <thead>
-                    <tr>
-                        <th>Hodnost</th>
-                        <th>Jméno</th>
-                        <th>Přezdívka</th>
-                        <th>Volačka</th>
-                        <th>Datum narození</th>
-                        <th>OOC Nick</th>
-                        <th>Body</th>
-                    </tr>
-                </thead>
-                <tbody id="members-list">
-                    <!-- Members will be dynamically added here -->
-                </tbody>
-            </table>
-            <h2>Přidat člena</h2>
-            <input type="text" id="add-name" placeholder="Jméno">
-            <input type="text" id="add-nickname" placeholder="Přezdívka">
-            <input type="text" id="add-vo" placeholder="Volačka">
-            <input type="date" id="add-birth">
-            <input type="text" id="add-ooc" placeholder="OOC Nick">
-            <button onclick="addMember()">Přidat člena</button>
-        </div>
-
-        <!-- ACTIVITY -->
-        <div id="activity-section">
-            <h1>Aktivity</h1>
-            <table id="activity-table">
-                <thead>
-                    <tr>
-                        <th>Přezdívka</th>
-                        <th>Aktivita</th>
-                        <th>Body</th>
-                        <th>Datum</th>
-                    </tr>
-                </thead>
-                <tbody id="activity-list">
-                    <!-- Activity logs will be dynamically added here -->
-                </tbody>
-            </table>
-            <h2>Přidat aktivitu</h2>
-            <input type="text" id="add-activity-nickname" placeholder="Přezdívka">
-            <input type="text" id="add-activity-name" placeholder="Aktivita">
-            <input type="number" id="add-activity-points" placeholder="Body">
-            <button onclick="addActivity()">Přidat aktivitu</button>
-        </div>
-
-        <!-- FINANCE -->
-        <div id="finance-section">
-            <h1>Účetnictví</h1>
-            <table id="finance-table">
-                <thead>
-                    <tr>
-                        <th>Datum</th>
-                        <th>Typ</th>
-                        <th>Částka</th>
-                        <th>Poznámka</th>
-                    </tr>
-                </thead>
-                <tbody id="finance-list">
-                    <!-- Financial records will be dynamically added here -->
-                </tbody>
-            </table>
-            <h2>Přidat záznam</h2>
-            <input type="date" id="add-finance-date">
-            <select id="add-finance-type">
-                <option value="Příjem">Příjem</option>
-                <option value="Výdaj">Výdaj</option>
-            </select>
-            <input type="number" id="add-finance-amount" placeholder="Částka">
-            <input type="text" id="add-finance-note" placeholder="Poznámka">
-            <button onclick="addFinance()">Přidat záznam</button>
-        </div>
-
-        <h2>Aktuální zůstatek: <span id="current-balance">$0</span></h2>
-    </div>
-
     <script src="scripts.js"></script>
 </body>
 </html>
