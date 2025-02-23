@@ -8,7 +8,6 @@
 </head>
 <body>
     <div id="login-container">
-        <!-- Login panel -->
         <div class="login-container">
             <h2>Admin Login</h2>
             <div class="login-form">
@@ -21,59 +20,20 @@
     </div>
 
     <div id="admin-panel" style="display:none;">
-        <div class="sidebar">
-            <ul>
-                <li><a href="#leadership-table">Vedení</a></li>
-                <li><a href="#members-table">Členové</a></li>
-                <li><a href="#points-table">Historie bodů</a></li>
-            </ul>
+        <h1>Shadow Council</h1>
+
+        <div id="menu">
+            <button onclick="showSection('members')">Členové</button>
+            <button onclick="showSection('points')">Body</button>
+            <button onclick="showSection('accounting')">Účetnictví</button>
         </div>
 
-        <div class="content">
-            <h1>Shadow Council Admin Panel</h1>
-
-            <!-- Vedení -->
-            <div id="leadership-table" class="section-title">
-                <h2>Vedení</h2>
-            </div>
-            <table id="leadership">
-                <thead>
-                    <tr>
-                        <th>Hodnost</th>
-                        <th>Jméno</th>
-                        <th>Přezdívka</th>
-                        <th>Volačka</th>
-                        <th>Datum narození</th>
-                        <th>OOC Nick</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Chief of Shadow Council</td>
-                        <td>Nicolas Ackermann</td>
-                        <td>Matthew</td>
-                        <td>Echo-1</td>
-                        <td>09/03/1995</td>
-                        <td>czipisekk</td>
-                    </tr>
-                    <tr>
-                        <td>High Advisor</td>
-                        <td>Lucas Davin</td>
-                        <td>Luca</td>
-                        <td>Echo-2</td>
-                        <td>07/03/2002</td>
-                        <td>madla_</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="divider"></div>
-
-            <!-- Členové -->
-            <div id="members-table" class="section-title">
+        <!-- Sekce pro členy -->
+        <div id="members" style="display:block;">
+            <div class="section-title">
                 <h2>Členové</h2>
             </div>
-            <table id="members">
+            <table id="members-table">
                 <thead>
                     <tr>
                         <th>Hodnost</th>
@@ -83,19 +43,37 @@
                         <th>Datum narození</th>
                         <th>OOC Nick</th>
                         <th>Body</th>
-                        <th>Upravit</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <!-- Členové budou přidáni pomocí JavaScriptu -->
+                <tbody id="members-body">
+                    <!-- Tady se budou přidávat řádky -->
                 </tbody>
             </table>
+            <form id="add-member-form">
+                <h3>Přidat nového člena</h3>
+                <select id="rank" required>
+                    <option value="Novice">Novice</option>
+                    <option value="Agent">Agent</option>
+                    <option value="Senior Agent">Senior Agent</option>
+                    <option value="Operations Commander">Operations Commander</option>
+                    <option value="Coordinator">Coordinator</option>
+                    <option value="Council Leader">Council Leader</option>
+                </select>
+                <input type="text" id="name" placeholder="Jméno" required>
+                <input type="text" id="nickname" placeholder="Přezdívka" required>
+                <input type="text" id="call-sign" placeholder="Volačka" required>
+                <input type="text" id="dob" placeholder="Datum narození (DD/MM/YYYY)" required>
+                <input type="text" id="ooc-nick" placeholder="OOC Nick" required>
+                <button type="submit">Přidat člena</button>
+            </form>
+        </div>
 
-            <!-- Historie bodů -->
-            <div id="points-table" class="section-title">
+        <!-- Sekce pro body -->
+        <div id="points" style="display:none;">
+            <div class="section-title">
                 <h2>Historie bodů</h2>
             </div>
-            <table id="points-history">
+            <table id="points-table">
                 <thead>
                     <tr>
                         <th>Přezdívka</th>
@@ -104,21 +82,50 @@
                         <th>DATUM</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <!-- Historie bodů bude přidána pomocí JavaScriptu -->
+                <tbody id="points-body">
+                    <!-- Tady se budou přidávat řádky -->
                 </tbody>
             </table>
+            <form id="add-points-form">
+                <h3>Přidat bodovou aktivitu</h3>
+                <input type="text" id="points-nickname" placeholder="Přezdívka" required>
+                <input type="text" id="points-activity" placeholder="Aktivita" required>
+                <input type="number" id="points-value" placeholder="Počet bodů" required>
+                <button type="submit">Přidat bod</button>
+            </form>
+        </div>
 
-            <!-- Formulář pro přidání bodů a členů -->
-            <div class="form-container">
-                <h3>Přidat bodový záznam</h3>
-                <form id="add-point-form">
-                    <input type="text" id="nickname-point" placeholder="Přezdívka" required>
-                    <input type="text" id="activity" placeholder="Aktivita" required>
-                    <input type="number" id="points" placeholder="Počet bodů" required>
-                    <input type="date" id="date" required>
-                    <button type="submit">Přidat bod</button>
-                </form>
+        <!-- Sekce pro účetnictví -->
+        <div id="accounting" style="display:none;">
+            <div class="section-title">
+                <h2>Účetnictví</h2>
+            </div>
+            <table id="accounting-table">
+                <thead>
+                    <tr>
+                        <th>Datum</th>
+                        <th>Typ</th>
+                        <th>Částka</th>
+                        <th>Poznámka</th>
+                    </tr>
+                </thead>
+                <tbody id="accounting-body">
+                    <!-- Historie transakcí zde -->
+                </tbody>
+            </table>
+            <form id="add-accounting-form">
+                <h3>Přidat transakci</h3>
+                <input type="date" id="transaction-date" required>
+                <select id="transaction-type" required>
+                    <option value="Příjem">Příjem</option>
+                    <option value="Výdaj">Výdaj</option>
+                </select>
+                <input type="number" id="transaction-amount" placeholder="Částka" required>
+                <input type="text" id="transaction-note" placeholder="Poznámka" required>
+                <button type="submit">Přidat transakci</button>
+            </form>
+            <div id="balance">
+                <h3>Aktuální zůstatek: $<span id="current-balance">0</span></h3>
             </div>
         </div>
     </div>
