@@ -1,131 +1,103 @@
 const adminUsername = "admin";
-const adminPassword = "n$gC8rj!3Xp@4Vz2";  // Strong password
+const adminPassword = "n$gC8rj!3Xp@4Vz2";
 
-// Data storage for members, activities, and finances
-let members = [];
-let activities = [];
-let finances = [];
-
-// Function to handle login
+// Funkce pro přihlášení
 function login() {
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
     const errorMessage = document.getElementById("error-message");
-    const adminPanel = document.getElementById("admin-panel");
-    const loginContainer = document.getElementById("login-container");
 
     if (username === adminUsername && password === adminPassword) {
-        errorMessage.style.display = "none";
-        adminPanel.style.display = "block";
-        loginContainer.style.display = "none";
+        window.location.href = "index.html";
     } else {
         errorMessage.style.display = "block";
     }
 }
 
-// Add member to the list
+// Funkce pro navigaci mezi stránkami
+function navigateTo(page) {
+    window.location.href = page;
+}
+
+// Funkce pro přidání člena
 function addMember() {
-    const name = document.getElementById("add-name").value;
-    const nickname = document.getElementById("add-nickname").value;
-    const vo = document.getElementById("add-vo").value;
-    const birth = document.getElementById("add-birth").value;
-    const ooc = document.getElementById("add-ooc").value;
-    const points = 0; // Default points for new member
+    const name = document.getElementById("new-member-name").value;
+    const rank = document.getElementById("new-member-rank").value;
 
-    const newMember = { name, nickname, vo, birth, ooc, points };
-    members.push(newMember);
-    renderMembers();
+    let members = loadData("members");
+    members.push({ name: name, rank: rank, points: 0 });
+    saveData("members", members);
+
+    loadMembers();
 }
 
-// Render members list dynamically
-function renderMembers() {
-    const membersTable = document.getElementById("members-list");
-    membersTable.innerHTML = "";
+// Funkce pro načtení členů
+function loadMembers() {
+    const members = loadData("members");
+    const membersList = document.getElementById("members-list");
+
+    membersList.innerHTML = "";
     members.forEach(member => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-            <td>Agent</td>
-            <td>${member.name}</td>
-            <td>${member.nickname}</td>
-            <td>${member.vo}</td>
-            <td>${member.birth}</td>
-            <td>${member.ooc}</td>
-            <td>${member.points}</td>
+        membersList.innerHTML += `
+            <tr>
+                <td>${member.rank}</td>
+                <td>${member.name}</td>
+                <td>${member.points}</td>
+                <td><button onclick="removeMember('${member.name}')">Smazat</button></td>
+            </tr>
         `;
-        membersTable.appendChild(row);
     });
 }
 
-// Add activity to the list
-function addActivity() {
-    const nickname = document.getElementById("add-activity-nickname").value;
-    const activity = document.getElementById("add-activity-name").value;
-    const points = document.getElementById("add-activity-points").value;
+// Funkce pro odstranění člena
+function removeMember(name) {
+    let members = loadData("members");
+    members = members.filter(member => member.name !== name);
+    saveData("members", members);
 
-    const newActivity = { nickname, activity, points, date: new Date().toLocaleDateString() };
-    activities.push(newActivity);
-    renderActivities();
+    loadMembers();
 }
 
-// Render activities dynamically
-function renderActivities() {
-    const activityList = document.getElementById("activity-list");
-    activityList.innerHTML = "";
-    activities.forEach(activity => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-            <td>${activity.nickname}</td>
-            <td>${activity.activity}</td>
-            <td>${activity.points}</td>
-            <td>${activity.date}</td>
-        `;
-        activityList.appendChild(row);
+// Funkce pro přidání bodů
+function addPoints() {
+    const name = document.getElementById("member-name").value;
+    const points = parseInt(document.getElementById("points-earned").value);
+    const history = loadData("points-history");
+
+    history.push({
+        name: name,
+        activity: "Aktivita",  // Můžeš upravit dle potřeby
+        points: points,
+        date: new Date().toLocaleDateString()
     });
+    saveData("points-history", history);
 
-    // Update points
-    updateMemberPoints(activity.nickname, activity.points);
+    loadPointsHistory();
 }
 
-// Add financial record
-function addFinance() {
-    const date = document.getElementById("add-finance-date").value;
-    const type = document.getElementById("add-finance-type").value;
-    const amount = document.getElementById("add-finance-amount").value;
-    const note = document.getElementById("add-finance-note").value;
+// Funkce pro načtení historie bodů
+function loadPointsHistory() {
+    const history = loadData("points-history");
+    const historyTable = document.getElementById("history-table");
 
-    const newFinance = { date, type, amount, note };
-    finances.push(newFinance);
-    renderFinance();
-    updateBalance(amount, type);
-}
-
-// Render finance dynamically
-function renderFinance() {
-    const financeList = document.getElementById("finance-list");
-    financeList.innerHTML = "";
-    finances.forEach(finance => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-            <td>${finance.date}</td>
-            <td>${finance.type}</td>
-            <td>${finance.amount}</td>
-            <td>${finance.note}</td>
+    historyTable.innerHTML = "";
+    history.forEach(entry => {
+        historyTable.innerHTML += `
+            <tr>
+                <td>${entry.name}</td>
+                <td>${entry.activity}</td>
+                <td>${entry.points}</td>
+                <td>${entry.date}</td>
+            </tr>
         `;
-        financeList.appendChild(row);
     });
 }
 
-// Update balance
-function updateBalance(amount, type) {
-    let currentBalance = parseFloat(document.getElementById("current-balance").textContent.replace("$", ""));
-    amount = parseFloat(amount);
-    
-    if (type === "Příjem") {
-        currentBalance += amount;
-    } else {
-        currentBalance -= amount;
-    }
+// Funkce pro přidání transakce do účetnictví
+function addTransaction() {
+    const amount = parseFloat(document.getElementById("amount").value);
+    const type = document.getElementById("transaction-type").value;
+    const note = document.getElementById("transaction-note").value;
+    const date = new Date().toLocaleDateString();
 
-    document.getElementById("current-balance").textContent = `$${currentBalance.toFixed(2)}`;
-}
-
+    let accountingHistory =
