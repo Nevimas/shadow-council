@@ -4,304 +4,118 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shadow Council - Členové</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #121212;
-            color: #fff;
-            margin: 0;
-            padding: 20px;
-            text-align: center;
-        }
-        h1 {
-            color: #e91e63;
-            margin-bottom: 20px;
-            font-size: 36px;
-            font-weight: bold;
-        }
-        h2 {
-            color: #ff4081;
-            font-size: 28px;
-            margin-bottom: 20px;
-        }
-        table {
-            width: 70%;
-            margin: 20px auto;
-            border-collapse: collapse;
-            background-color: #333;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-        }
-        table, th, td {
-            border: 1px solid #444;
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
-        th {
-            background-color: #1e1e1e;
-            color: #ff4081;
-        }
-        tr:nth-child(even) {
-            background-color: #242424;
-        }
-        tr:hover {
-            background-color: #444;
-        }
-        td {
-            color: #bbb;
-        }
-        .form-container {
-            margin-top: 30px;
-            background-color: #333;
-            padding: 20px;
-            border-radius: 8px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        input, select {
-            padding: 8px;
-            margin: 5px;
-            border: 1px solid #444;
-            border-radius: 4px;
-            width: 200px;
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #e91e63;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #ff4081;
-        }
-        .divider {
-            margin: 40px 0;
-            border-top: 2px solid #555;
-        }
-        .icon {
-            width: 30px;
-            height: 30px;
-            vertical-align: middle;
-            margin-left: 10px;
-        }
-        .section-title {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .section-title img {
-            margin-right: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Shadow Council <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Iconic_image_of_shadow.svg/512px-Iconic_image_of_shadow.svg.png" class="icon" alt="Shadow Icon"></h1>
-
-    <!-- Vedení -->
-    <div class="section-title">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Iconic_image_of_shadow.svg/512px-Iconic_image_of_shadow.svg.png" class="icon" alt="Leadership Icon">
-        <h2>Vedení</h2>
+    <div id="login-container">
+        <!-- Login panel -->
+        <div class="login-container">
+            <h2>Admin Login</h2>
+            <div class="login-form">
+                <input type="text" id="username" class="input-field" placeholder="Uživatelské jméno" required><br>
+                <input type="password" id="password" class="input-field" placeholder="Heslo" required><br>
+                <button class="login-button" onclick="login()">Přihlásit</button>
+                <p class="error-message" id="error-message">Nesprávné uživatelské jméno nebo heslo!</p>
+            </div>
+        </div>
     </div>
-    <table id="leadership-table">
-        <thead>
-            <tr>
-                <th>Hodnost</th>
-                <th>Jméno</th>
-                <th>Přezdívka</th>
-                <th>Volačka</th>
-                <th>Datum narození</th>
-                <th>OOC Nick</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Chief of Shadow Council</td>
-                <td>Nicolas Ackermann</td>
-                <td>Matthew</td>
-                <td>Echo-1</td>
-                <td>09/03/1995</td>
-                <td>czipisekk</td>
-            </tr>
-            <tr>
-                <td>High Advisor</td>
-                <td>Lucas Davin</td>
-                <td>Luca</td>
-                <td>Echo-2</td>
-                <td>07/03/2002</td>
-                <td>madla_</td>
-            </tr>
-            <tr>
-                <td>Council Leader</td>
-                <td></td>
-                <td></td>
-                <td>Echo-3</td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Coordinator</td>
-                <td>Enzo Rossi</td>
-                <td>Delta</td>
-                <td>Echo-4</td>
-                <td>02/02/1996</td>
-                <td>lawle_</td>
-            </tr>
-            <tr>
-                <td>Operations Commander</td>
-                <td>Ryan Chambers</td>
-                <td>Hunter</td>
-                <td>Echo-5</td>
-                <td>15/02/1997</td>
-                <td>Nevimas</td>
-            </tr>
-            <tr>
-                <td>Operations Commander</td>
-                <td></td>
-                <td></td>
-                <td>Echo-6</td>
-                <td></td>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
 
-    <!-- Členové -->
-    <div class="divider"></div>
-    <div class="section-title">
-        <h2>Členové</h2>
+    <div id="admin-panel" style="display:none;">
+        <h1>Shadow Council</h1>
+
+        <!-- Vedení -->
+        <div class="section-title">
+            <h2>Vedení</h2>
+        </div>
+        <table id="leadership-table">
+            <thead>
+                <tr>
+                    <th>Hodnost</th>
+                    <th>Jméno</th>
+                    <th>Přezdívka</th>
+                    <th>Volačka</th>
+                    <th>Datum narození</th>
+                    <th>OOC Nick</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Chief of Shadow Council</td>
+                    <td>Nicolas Ackermann</td>
+                    <td>Matthew</td>
+                    <td>Echo-1</td>
+                    <td>09/03/1995</td>
+                    <td>czipisekk</td>
+                </tr>
+                <tr>
+                    <td>High Advisor</td>
+                    <td>Lucas Davin</td>
+                    <td>Luca</td>
+                    <td>Echo-2</td>
+                    <td>07/03/2002</td>
+                    <td>madla_</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Členové -->
+        <div class="divider"></div>
+        <div class="section-title">
+            <h2>Členové</h2>
+        </div>
+        <table id="members-table">
+            <thead>
+                <tr>
+                    <th>Hodnost</th>
+                    <th>Jméno</th>
+                    <th>Přezdívka</th>
+                    <th>Volačka</th>
+                    <th>Datum narození</th>
+                    <th>OOC Nick</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Agent</td>
+                    <td>Carlito</td>
+                    <td></td>
+                    <td>Echo-16</td>
+                    <td></td>
+                    <td>junky8613</td>
+                </tr>
+                <tr>
+                    <td>Agent</td>
+                    <td>Salko</td>
+                    <td></td>
+                    <td>Echo-17</td>
+                    <td></td>
+                    <td>verdamm</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Formulář pro přidání nového člena -->
+        <div class="form-container">
+            <h3>Přidat nového člena</h3>
+            <form id="add-member-form">
+                <select id="rank" required>
+                    <option value="Novice">Novice</option>
+                    <option value="Agent">Agent</option>
+                    <option value="Senior Agent">Senior Agent</option>
+                    <option value="Operations Commander">Operations Commander</option>
+                    <option value="Coordinator">Coordinator</option>
+                    <option value="Council Leader">Council Leader</option>
+                </select>
+                <input type="text" id="name" placeholder="Jméno" required>
+                <input type="text" id="nickname" placeholder="Přezdívka" required>
+                <input type="text" id="call-sign" placeholder="Volačka" required>
+                <input type="text" id="dob" placeholder="Datum narození (DD/MM/YYYY)" required>
+                <input type="text" id="ooc-nick" placeholder="OOC Nick" required>
+                <button type="submit">Přidat člena</button>
+            </form>
+        </div>
     </div>
-    <table id="members-table">
-        <thead>
-            <tr>
-                <th>Hodnost</th>
-                <th>Jméno</th>
-                <th>Přezdívka</th>
-                <th>Volačka</th>
-                <th>Datum narození</th>
-                <th>OOC Nick</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Agent</td>
-                <td>Carlito</td>
-                <td></td>
-                <td>Echo-16</td>
-                <td></td>
-                <td>junky8613</td>
-            </tr>
-            <tr>
-                <td>Agent</td>
-                <td>Salko</td>
-                <td></td>
-                <td>Echo-17</td>
-                <td></td>
-                <td>verdamm</td>
-            </tr>
-            <tr>
-                <td>Agent</td>
-                <td>Danto</td>
-                <td></td>
-                <td>Echo-18</td>
-                <td></td>
-                <td>cpxm1le</td>
-            </tr>
-            <tr>
-                <td>Agent</td>
-                <td>Senor</td>
-                <td></td>
-                <td>Echo-19</td>
-                <td></td>
-                <td>mentystv</td>
-            </tr>
-            <tr>
-                <td>Novice</td>
-                <td>Yella Ackermann</td>
-                <td>Yella</td>
-                <td>Echo-22</td>
-                <td>04/11/2000</td>
-                <td>Nicanemam</td>
-            </tr>
-            <tr>
-                <td>Novice</td>
-                <td>Mayo</td>
-                <td></td>
-                <td>Echo-23</td>
-                <td></td>
-                <td>henryas_lol</td>
-            </tr>
-            <tr>
-                <td>Novice</td>
-                <td>Drtič</td>
-                <td></td>
-                <td>Echo-24</td>
-                <td></td>
-                <td>dcv_bryan1</td>
-            </tr>
-            <tr>
-                <td>Novice</td>
-                <td></td>
-                <td></td>
-                <td>Echo-25</td>
-                <td></td>
-                <td>bimbi12</td>
-            </tr>
-            <tr>
-                <td>Novice</td>
-                <td>Luca Venuto</td>
-                <td>Viper</td>
-                <td>Echo-26</td>
-                <td>31/7/1993</td>
-                <td>inomex</td>
-            </tr>
-            <tr>
-                <td>Novice</td>
-                <td></td>
-                <td></td>
-                <td>Echo-27</td>
-                <td></td>
-                <td>prostedominik</td>
-            </tr>
-            <tr>
-                <td>Novice</td>
-                <td>Tokai</td>
-                <td></td>
-                <td>Echo-28</td>
-                <td></td>
-                <td>koka1nen</td>
-            </tr>
-            <tr>
-                <td>Novice</td>
-                <td>Axe</td>
-                <td></td>
-                <td>Echo-29</td>
-                <td></td>
-                <td>n3lly</td>
-            </tr>
-            <tr>
-                <td>Novice</td>
-                <td>Hitman</td>
-                <td></td>
-                <td>Echo-30</td>
-                <td></td>
-                <td>adamsvrcina</td>
-            </tr>
-        </tbody>
-    </table>
 
-    <!-- Formulář pro přidání nového člena -->
-    <div class="form-container">
-        <h3>Přidat nového člena</h3>
-        <form id="add-member-form">
-            <select id="rank" required>
-                <option value="Novice">Novice</option>
-                <option value="Agent">Agent</option>
-                <option value="Senior Agent">Senior Agent</option>
-                <option value="Operations Commander">Operations Commander</option>
-                <option value="Coordinator">Coordinator</option>
-                <option value="Council Leader">Council Leader</option
+    <script src="scripts.js"></script>
+</body>
+</html>
