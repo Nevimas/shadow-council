@@ -1,5 +1,9 @@
 const adminUsername = "admin";
 const adminPassword = "n$gC8rj!3Xp@4Vz2"; // Silné heslo
+let members = [];
+let pointsHistory = [];
+let accountingHistory = [];
+let balance = 0;
 
 function login() {
     const username = document.getElementById("username").value;
@@ -17,29 +21,118 @@ function login() {
     }
 }
 
-// Údaje o členech a historie bodů
-let members = [
-    { rank: "Chief of Shadow Council", name: "Nicolas Ackermann", nickname: "Matthew", callSign: "Echo-1", dob: "09/03/1995", oocNick: "czipisekk", points: 0 },
-    { rank: "High Advisor", name: "Lucas Davin", nickname: "Luca", callSign: "Echo-2", dob: "07/03/2002", oocNick: "madla_", points: 0 },
-    // Přidáme další členy
-];
+function showSection(section) {
+    document.getElementById('members').style.display = section === 'members' ? 'block' : 'none';
+    document.getElementById('points').style.display = section === 'points' ? 'block' : 'none';
+    document.getElementById('accounting').style.display = section === 'accounting' ? 'block' : 'none';
+}
 
-let pointsHistory = [
-    { nickname: "Danto", activity: "Záchrana vedení", points: 10, date: "6.2. 2025" },
-    { nickname: "Yella", activity: "Záchrana vedení", points: 10, date: "6.2. 2025" },
-    // Přidáme další body
-];
+// Funkce pro přidání člena
+document.getElementById("add-member-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const member = {
+        rank: document.getElementById("rank").value,
+        name: document.getElementById("name").value,
+        nickname: document.getElementById("nickname").value,
+        callSign: document.getElementById("call-sign").value,
+        dob: document.getElementById("dob").value,
+        oocNick: document.getElementById("ooc-nick").value,
+        points: 0
+    };
+    members.push(member);
+    updateMemberTable();
+});
 
-function loadMembers() {
-    const tableBody = document.getElementById("members").getElementsByTagName("tbody")[0];
+// Funkce pro zobrazení členů
+function updateMemberTable() {
+    const membersBody = document.getElementById("members-body");
+    membersBody.innerHTML = "";
     members.forEach(member => {
-        const row = tableBody.insertRow();
-        row.insertCell(0).textContent = member.rank;
-        row.insertCell(1).textContent = member.name;
-        row.insertCell(2).textContent = member.nickname;
-        row.insertCell(3).textContent = member.callSign;
-        row.insertCell(4).textContent = member.dob;
-        row.insertCell(5).textContent = member.oocNick;
-        row.insertCell(6).textContent = member.points;
-        let editButton = document.createElement("button");
-        editButton.textContent = "Upravit
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${member.rank}</td>
+            <td>${member.name}</td>
+            <td>${member.nickname}</td>
+            <td>${member.callSign}</td>
+            <td>${member.dob}</td>
+            <td>${member.oocNick}</td>
+            <td>${member.points}</td>
+        `;
+        membersBody.appendChild(row);
+    });
+}
+
+// Funkce pro přidání bodu do historie
+document.getElementById("add-points-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const point = {
+        nickname: document.getElementById("points-nickname").value,
+        activity: document.getElementById("points-activity").value,
+        points: parseInt(document.getElementById("points-value").value),
+        date: new Date().toLocaleDateString()
+    };
+    pointsHistory.push(point);
+    updatePointsTable();
+    updateMemberPoints(point.nickname, point.points);
+});
+
+// Funkce pro zobrazení bodů
+function updatePointsTable() {
+    const pointsBody = document.getElementById("points-body");
+    pointsBody.innerHTML = "";
+    pointsHistory.forEach(point => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${point.nickname}</td>
+            <td>${point.activity}</td>
+            <td>${point.points}</td>
+            <td>${point.date}</td>
+        `;
+        pointsBody.appendChild(row);
+    });
+}
+
+// Funkce pro aktualizaci bodů u člena
+function updateMemberPoints(nickname, points) {
+    const member = members.find(m => m.nickname === nickname);
+    if (member) {
+        member.points += points;
+    }
+    updateMemberTable();
+}
+
+// Funkce pro přidání transakce
+document.getElementById("add-accounting-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const transaction = {
+        date: document.getElementById("transaction-date").value,
+        type: document.getElementById("transaction-type").value,
+        amount: parseFloat(document.getElementById("transaction-amount").value),
+        note: document.getElementById("transaction-note").value
+    };
+    accountingHistory.push(transaction);
+    updateAccountingTable();
+    updateBalance(transaction);
+});
+
+// Funkce pro zobrazení účetnictví
+function updateAccountingTable() {
+    const accountingBody = document.getElementById("accounting-body");
+    accountingBody.innerHTML = "";
+    accountingHistory.forEach(transaction => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${transaction.date}</td>
+            <td>${transaction.type}</td>
+            <td>$${transaction.amount}</td>
+            <td>${transaction.note}</td>
+        `;
+        accountingBody.appendChild(row);
+    });
+}
+
+// Funkce pro aktualizaci zůstatku
+function updateBalance(transaction) {
+    balance += (transaction.type === "Příjem" ? transaction.amount : -transaction.amount);
+    document.getElementById("current-balance").innerText = balance.toFixed(2);
+}
