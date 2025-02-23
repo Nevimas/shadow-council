@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shadow Council - Členové</title>
+    <title>Shadow Council - Admin Panel</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -21,98 +21,105 @@
     </div>
 
     <div id="admin-panel" style="display:none;">
-        <h1>Shadow Council</h1>
-
-        <!-- Vedení -->
-        <div class="section-title">
-            <h2>Vedení</h2>
+        <div class="sidebar">
+            <ul>
+                <li><a href="#leadership-table">Vedení</a></li>
+                <li><a href="#members-table">Členové</a></li>
+                <li><a href="#points-table">Historie bodů</a></li>
+            </ul>
         </div>
-        <table id="leadership-table">
-            <thead>
-                <tr>
-                    <th>Hodnost</th>
-                    <th>Jméno</th>
-                    <th>Přezdívka</th>
-                    <th>Volačka</th>
-                    <th>Datum narození</th>
-                    <th>OOC Nick</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Chief of Shadow Council</td>
-                    <td>Nicolas Ackermann</td>
-                    <td>Matthew</td>
-                    <td>Echo-1</td>
-                    <td>09/03/1995</td>
-                    <td>czipisekk</td>
-                </tr>
-                <tr>
-                    <td>High Advisor</td>
-                    <td>Lucas Davin</td>
-                    <td>Luca</td>
-                    <td>Echo-2</td>
-                    <td>07/03/2002</td>
-                    <td>madla_</td>
-                </tr>
-            </tbody>
-        </table>
 
-        <!-- Členové -->
-        <div class="divider"></div>
-        <div class="section-title">
-            <h2>Členové</h2>
-        </div>
-        <table id="members-table">
-            <thead>
-                <tr>
-                    <th>Hodnost</th>
-                    <th>Jméno</th>
-                    <th>Přezdívka</th>
-                    <th>Volačka</th>
-                    <th>Datum narození</th>
-                    <th>OOC Nick</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Agent</td>
-                    <td>Carlito</td>
-                    <td></td>
-                    <td>Echo-16</td>
-                    <td></td>
-                    <td>junky8613</td>
-                </tr>
-                <tr>
-                    <td>Agent</td>
-                    <td>Salko</td>
-                    <td></td>
-                    <td>Echo-17</td>
-                    <td></td>
-                    <td>verdamm</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="content">
+            <h1>Shadow Council Admin Panel</h1>
 
-        <!-- Formulář pro přidání nového člena -->
-        <div class="form-container">
-            <h3>Přidat nového člena</h3>
-            <form id="add-member-form">
-                <select id="rank" required>
-                    <option value="Novice">Novice</option>
-                    <option value="Agent">Agent</option>
-                    <option value="Senior Agent">Senior Agent</option>
-                    <option value="Operations Commander">Operations Commander</option>
-                    <option value="Coordinator">Coordinator</option>
-                    <option value="Council Leader">Council Leader</option>
-                </select>
-                <input type="text" id="name" placeholder="Jméno" required>
-                <input type="text" id="nickname" placeholder="Přezdívka" required>
-                <input type="text" id="call-sign" placeholder="Volačka" required>
-                <input type="text" id="dob" placeholder="Datum narození (DD/MM/YYYY)" required>
-                <input type="text" id="ooc-nick" placeholder="OOC Nick" required>
-                <button type="submit">Přidat člena</button>
-            </form>
+            <!-- Vedení -->
+            <div id="leadership-table" class="section-title">
+                <h2>Vedení</h2>
+            </div>
+            <table id="leadership">
+                <thead>
+                    <tr>
+                        <th>Hodnost</th>
+                        <th>Jméno</th>
+                        <th>Přezdívka</th>
+                        <th>Volačka</th>
+                        <th>Datum narození</th>
+                        <th>OOC Nick</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Chief of Shadow Council</td>
+                        <td>Nicolas Ackermann</td>
+                        <td>Matthew</td>
+                        <td>Echo-1</td>
+                        <td>09/03/1995</td>
+                        <td>czipisekk</td>
+                    </tr>
+                    <tr>
+                        <td>High Advisor</td>
+                        <td>Lucas Davin</td>
+                        <td>Luca</td>
+                        <td>Echo-2</td>
+                        <td>07/03/2002</td>
+                        <td>madla_</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="divider"></div>
+
+            <!-- Členové -->
+            <div id="members-table" class="section-title">
+                <h2>Členové</h2>
+            </div>
+            <table id="members">
+                <thead>
+                    <tr>
+                        <th>Hodnost</th>
+                        <th>Jméno</th>
+                        <th>Přezdívka</th>
+                        <th>Volačka</th>
+                        <th>Datum narození</th>
+                        <th>OOC Nick</th>
+                        <th>Body</th>
+                        <th>Upravit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Členové budou přidáni pomocí JavaScriptu -->
+                </tbody>
+            </table>
+
+            <!-- Historie bodů -->
+            <div id="points-table" class="section-title">
+                <h2>Historie bodů</h2>
+            </div>
+            <table id="points-history">
+                <thead>
+                    <tr>
+                        <th>Přezdívka</th>
+                        <th>Aktivita</th>
+                        <th>BODY</th>
+                        <th>DATUM</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Historie bodů bude přidána pomocí JavaScriptu -->
+                </tbody>
+            </table>
+
+            <!-- Formulář pro přidání bodů a členů -->
+            <div class="form-container">
+                <h3>Přidat bodový záznam</h3>
+                <form id="add-point-form">
+                    <input type="text" id="nickname-point" placeholder="Přezdívka" required>
+                    <input type="text" id="activity" placeholder="Aktivita" required>
+                    <input type="number" id="points" placeholder="Počet bodů" required>
+                    <input type="date" id="date" required>
+                    <button type="submit">Přidat bod</button>
+                </form>
+            </div>
         </div>
     </div>
 
