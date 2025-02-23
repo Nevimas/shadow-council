@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vedení a Členové - Shadow Council</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="menu">
+        <button onclick="navigateTo('index.html')">Úvodní stránka</button>
+        <button onclick="navigateTo('points.html')">Bodový systém</button>
+        <button onclick="navigateTo('accounting.html')">Účetnictví</button>
+    </div>
+
+    <div id="leadership">
+        <h2>Vedení a Členové</h2>
+        <table id="members-table">
+            <thead>
+                <tr>
+                    <th>Hodnost</th>
+                    <th>Jméno</th>
+                    <th>Hodnost</th>
+                    <th>Akce</th>
+                </tr>
+            </thead>
+            <tbody id="members-list">
+                <!-- Členové budou dynamicky přidání -->
+            </tbody>
+        </table>
+        <div id="add-member">
+            <h3>Nový člen</h3>
+            <input type="text" id="new-member-name" placeholder="Jméno člena" />
+            <select id="new-member-rank">
+                <option value="Novice">Novice</option>
+                <option value="Agent">Agent</option>
+                <option value="Senior Agent">Senior Agent</option>
+                <option value="Operations Commander">Operations Commander</option>
+                <option value="Coordinator">Coordinator</option>
+                <option value="Council Leader">Council Leader</option>
+                <option value="High Advisor">High Advisor</option>
+                <option value="Chief of Shadow Council">Chief of Shadow Council</option>
+            </select>
+            <button onclick="addMember()">Přidat člena</button>
+        </div>
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html>
