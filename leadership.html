@@ -3,47 +3,266 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vedení a Členové - Shadow Council</title>
+    <title>Shadow Council - Members</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="menu">
-        <button onclick="navigateTo('index.html')">Úvodní stránka</button>
-        <button onclick="navigateTo('points.html')">Bodový systém</button>
-        <button onclick="navigateTo('accounting.html')">Účetnictví</button>
-    </div>
+    <!-- Menu a navigace -->
+    <nav>
+        <ul>
+            <li><a href="home.html">Úvodní Stránka</a></li>
+            <li><a href="members.html">Vedení a Členové</a></li>
+            <li><a href="points.html">Bodový Systém</a></li>
+            <li><a href="accounting.html">Účetnictví</a></li>
+        </ul>
+    </nav>
 
-    <div id="leadership">
-        <h2>Vedení a Členové</h2>
-        <table id="members-table">
+    <div class="container">
+        <h1>Vedení a Členové</h1>
+
+        <!-- Tabulka pro vedení -->
+        <h2>Vedení</h2>
+        <table>
             <thead>
                 <tr>
                     <th>Hodnost</th>
                     <th>Jméno</th>
-                    <th>Hodnost</th>
-                    <th>Akce</th>
+                    <th>Přezdívka</th>
+                    <th>Volačka</th>
+                    <th>Datum Narození</th>
+                    <th>OOC Nick</th>
                 </tr>
             </thead>
-            <tbody id="members-list">
-                <!-- Členové budou dynamicky přidání -->
+            <tbody>
+                <tr>
+                    <td>Chief of Shadow Council</td>
+                    <td>Nicolas Ackermann</td>
+                    <td>Matthew</td>
+                    <td>Echo-1</td>
+                    <td>09/03/1995</td>
+                    <td>czipisekk</td>
+                </tr>
+                <tr>
+                    <td>High Advisor</td>
+                    <td>Lucas Davin</td>
+                    <td>Luca</td>
+                    <td>Echo-2</td>
+                    <td>07/03/2002</td>
+                    <td>madla_</td>
+                </tr>
+                <tr>
+                    <td>Council Leader</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>Echo-3</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>Coordinator</td>
+                    <td>Rhys Miller</td>
+                    <td>Delta</td>
+                    <td>Echo-4</td>
+                    <td>02/02/1996</td>
+                    <td>lawle_</td>
+                </tr>
+                <tr>
+                    <td>Operations Commander</td>
+                    <td>Ryan Chambers</td>
+                    <td>Hunter</td>
+                    <td>Echo-5</td>
+                    <td>15/02/1997</td>
+                    <td>Nevimas</td>
+                </tr>
+                <tr>
+                    <td>Operations Commander</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>Echo-6</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
             </tbody>
         </table>
-        <div id="add-member">
-            <h3>Nový člen</h3>
-            <input type="text" id="new-member-name" placeholder="Jméno člena" />
-            <select id="new-member-rank">
-                <option value="Novice">Novice</option>
-                <option value="Agent">Agent</option>
-                <option value="Senior Agent">Senior Agent</option>
-                <option value="Operations Commander">Operations Commander</option>
-                <option value="Coordinator">Coordinator</option>
-                <option value="Council Leader">Council Leader</option>
-                <option value="High Advisor">High Advisor</option>
-                <option value="Chief of Shadow Council">Chief of Shadow Council</option>
-            </select>
-            <button onclick="addMember()">Přidat člena</button>
-        </div>
+
+        <!-- Tabulka pro členy -->
+        <h2>Členové</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Hodnost</th>
+                    <th>Jméno</th>
+                    <th>Přezdívka</th>
+                    <th>Volačka</th>
+                    <th>Datum Narození</th>
+                    <th>OOC Nick</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Senior Agent</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>Echo-11</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>Senior Agent</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>Echo-12</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>Senior Agent</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>Echo-13</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>Senior Agent</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>Echo-14</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>Senior Agent</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>Echo-15</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>Agent</td>
+                    <td>Carlito</td>
+                    <td>-</td>
+                    <td>Echo-16</td>
+                    <td>-</td>
+                    <td>junky8613</td>
+                </tr>
+                <tr>
+                    <td>Agent</td>
+                    <td>Salko</td>
+                    <td>-</td>
+                    <td>Echo-17</td>
+                    <td>-</td>
+                    <td>verdamm</td>
+                </tr>
+                <tr>
+                    <td>Agent</td>
+                    <td>Danto</td>
+                    <td>-</td>
+                    <td>Echo-18</td>
+                    <td>-</td>
+                    <td>cpxm1le</td>
+                </tr>
+                <tr>
+                    <td>Agent</td>
+                    <td>Senor</td>
+                    <td>-</td>
+                    <td>Echo-19</td>
+                    <td>-</td>
+                    <td>mentystv</td>
+                </tr>
+                <tr>
+                    <td>Agent</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>Echo-20</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>Agent</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>Echo-21</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>Novice</td>
+                    <td>Yella Ackermann</td>
+                    <td>Yella</td>
+                    <td>Echo-22</td>
+                    <td>04/11/2000</td>
+                    <td>Nicanemam</td>
+                </tr>
+                <tr>
+                    <td>Novice</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>Echo-23</td>
+                    <td>-</td>
+                    <td>henryas_lol</td>
+                </tr>
+                <tr>
+                    <td>Novice</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>Echo-24</td>
+                    <td>-</td>
+                    <td>dcv_bryan1</td>
+                </tr>
+                <tr>
+                    <td>Novice</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>Echo-25</td>
+                    <td>-</td>
+                    <td>bimbi12</td>
+                </tr>
+                <tr>
+                    <td>Novice</td>
+                    <td>Luca Venuto</td>
+                    <td>Viper</td>
+                    <td>Echo-26</td>
+                    <td>31/07/1993</td>
+                    <td>inomex</td>
+                </tr>
+                <tr>
+                    <td>Novice</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>Echo-27</td>
+                    <td>-</td>
+                    <td>prostedominik</td>
+                </tr>
+                <tr>
+                    <td>Novice</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>Echo-28</td>
+                    <td>-</td>
+                    <td>koka1nen</td>
+                </tr>
+                <tr>
+                    <td>Novice</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>Echo-29</td>
+                    <td>-</td>
+                    <td>n3lly</td>
+                </tr>
+                <tr>
+                    <td>Novice</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>Echo-30</td>
+                    <td>-</td>
+                    <td>adamsvrcina</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button class="add-button">Přidat člena</button>
     </div>
-    <script src="scripts.js"></script>
 </body>
 </html>
