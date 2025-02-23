@@ -1,119 +1,166 @@
-// Starting version
-let version = '1.0.0';
-
-// Admin credentials
-const adminCredentials = {
-    username: 'admin',
-    password: 'n$gC8rj!3Xp@4Vz2' // Updated strong password
+let users = {
+    "admin": "n$gC8rj!3Xp@4Vz2"
 };
 
-// Handle login submission
-document.getElementById('loginForm').addEventListener('submit', function (e) {
-    e.preventDefault();
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+let members = [
+    { name: "Nicolas Ackermann", nickname: "Matthew", rank: "Chief", points: 0 },
+    { name: "Lucas Davin", nickname: "Luca", rank: "High Advisor", points: 0 }
+    // Přidejte další členy podle potřeby
+];
 
-    if (username === adminCredentials.username && password === adminCredentials.password) {
-        document.getElementById('login').style.display = 'none';
-        document.getElementById('mainContent').style.display = 'block';
-        loadHomePage();
+let pointsHistory = [];
+
+let accountingRecords = [];
+
+let balance = 0;
+
+document.getElementById("loginForm").addEventListener("submit", function (event) {
+    event.preventDefault();
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
+
+    if (users[username] === password) {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("menu").style.display = "block";
+        document.getElementById("contentArea").style.display = "block";
+        showPage('home');
     } else {
-        document.getElementById('loginError').style.display = 'block';
+        document.getElementById("error-message").style.display = "block";
     }
 });
 
-// Update version number
-function updateVersion() {
-    version = incrementVersion(version);
-    document.getElementById('version').textContent = 'Verze: ' + version;
+function showPage(page) {
+    let pages = document.querySelectorAll(".page");
+    pages.forEach(function (pageElement) {
+        pageElement.style.display = "none";
+    });
+    document.getElementById(page).style.display = "block";
 }
 
-// Increment the version number
-function incrementVersion(version) {
-    let versionParts = version.split('.');
-    versionParts[2] = parseInt(versionParts[2]) + 1;
-    return versionParts.join('.');
+function addMember() {
+    let name = prompt("Enter member name:");
+    let nickname = prompt("Enter member nickname:");
+    let rank = prompt("Enter member rank:");
+    if (name && nickname && rank) {
+        members.push({ name, nickname, rank, points: 0 });
+        renderMembers();
+    }
 }
 
-// Load different pages based on menu selection
-document.getElementById('homeLink').addEventListener('click', loadHomePage);
-document.getElementById('membersLink').addEventListener('click', loadMembersPage);
-document.getElementById('pointsLink').addEventListener('click', loadPointsPage);
-document.getElementById('accountingLink').addEventListener('click', loadAccountingPage);
-
-// Content loading functions
-function loadHomePage() {
-    document.getElementById('contentArea').innerHTML = `<h3>Vítejte na Admin Panelu!</h3><p>Tato stránka umožňuje správu členů, bodů a účetnictví.</p>`;
+function renderMembers() {
+    let table = document.getElementById("membersTable").getElementsByTagName('tbody')[0];
+    table.innerHTML = "";
+    members.forEach((member, index) => {
+        let row = table.insertRow();
+        row.innerHTML = `
+            <td>${member.name}</td>
+            <td>${member.nickname}</td>
+            <td>${member.rank}</td>
+            <td><button onclick="editMember(${index})">Edit</button> <button onclick="removeMember(${index})">Remove</button></td>
+        `;
+    });
 }
 
-function loadMembersPage() {
-    document.getElementById('contentArea').innerHTML = `
-        <h3>Seznam Členů a Vedení</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Hodnost</th>
-                    <th>Jméno</th>
-                    <th>Přezdívka</th>
-                    <th>Body</th>
-                    <th>Akce</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Chief of Shadow Council</td>
-                    <td>Nicolas Ackermann</td>
-                    <td>Matthew</td>
-                    <td>100</td>
-                    <td><button onclick="editMember('Nicolas')">Edit</button> <button onclick="removeMember('Nicolas')">Remove</button></td>
-                </tr>
-                <!-- Add other members here -->
-            </tbody>
-        </table>
-        <h3>Historie Bodů</h3>
-        <!-- Form for adding points history goes here -->
-        <button onclick="updateVersion()">Update Version</button>
-    `;
+function removeMember(index) {
+    members.splice(index, 1);
+    renderMembers();
 }
 
-function loadPointsPage() {
-    document.getElementById('contentArea').innerHTML = `
-        <h3>Bodový Systém</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Seznam členů</th>
-                    <th>Bodová Historie</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Points history goes here -->
-            </tbody>
-        </table>
-    `;
+function editMember(index) {
+    let name = prompt("Edit member name:", members[index].name);
+    let nickname = prompt("Edit member nickname:", members[index].nickname);
+    let rank = prompt("Edit member rank:", members[index].rank);
+    if (name && nickname && rank) {
+        members[index] = { name, nickname, rank, points: members[index].points };
+        renderMembers();
+    }
 }
 
-function loadAccountingPage() {
-    document.getElementById('contentArea').innerHTML = `
-        <h3>Účetnictví</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Datum</th>
-                    <th>Typ</th>
-                    <th>Částka</th>
-                    <th>Poznámka</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>20.02. 2025</td>
-                    <td>Příjem</td>
-                    <td>$500,000</td>
-                    <td>Vražda Amy Aria Grivas</td>
-                </tr>
-                <!-- More transactions -->
-            </tbody>
-        </table>
-    `;
+function addPoints() {
+    let nickname = prompt("Enter member nickname:");
+    let points = parseInt(prompt("Enter points to add:"));
+    if (nickname && points) {
+        let member = members.find(m => m.nickname === nickname);
+        if (member) {
+            member.points += points;
+            pointsHistory.push({ nickname, points, date: new Date().toLocaleDateString() });
+            renderPoints();
+        } else {
+            alert("Member not found!");
+        }
+    }
 }
+
+function renderPoints() {
+    let table = document.getElementById("pointsTable").getElementsByTagName('tbody')[0];
+    table.innerHTML = "";
+    members.forEach(member => {
+        let row = table.insertRow();
+        row.innerHTML = `
+            <td>${member.nickname}</td>
+            <td>${member.points}</td>
+            <td><button onclick="editPoints('${member.nickname}')">Edit</button> <button onclick="removePoints('${member.nickname}')">Remove</button></td>
+        `;
+    });
+}
+
+function removePoints(nickname) {
+    let member = members.find(m => m.nickname === nickname);
+    if (member) {
+        member.points = 0;
+        renderPoints();
+    }
+}
+
+function editPoints(nickname) {
+    let points = parseInt(prompt("Edit points:", ""));
+    let member = members.find(m => m.nickname === nickname);
+    if (member && points >= 0) {
+        member.points = points;
+        renderPoints();
+    }
+}
+
+function addAccounting() {
+    let date = prompt("Enter date (e.g. 20.02.2025):");
+    let type = prompt("Enter type (Příjem/Výdaj):");
+    let amount = parseFloat(prompt("Enter amount:"));
+    let description = prompt("Enter description:");
+    if (date && type && amount && description) {
+        accountingRecords.push({ date, type, amount, description });
+        if (type === "Příjem") {
+            balance += amount;
+        } else {
+            balance -= amount;
+        }
+        renderAccounting();
+    }
+}
+
+function renderAccounting() {
+    let table = document.getElementById("accountingTable").getElementsByTagName('tbody')[0];
+    table.innerHTML = "";
+    accountingRecords.forEach(record => {
+        let row = table.insertRow();
+        row.innerHTML = `
+            <td>${record.date}</td>
+            <td>${record.type}</td>
+            <td>$${record.amount}</td>
+            <td>${record.description}</td>
+            <td><button onclick="removeAccounting(${accountingRecords.indexOf(record)})">Remove</button></td>
+        `;
+    });
+    document.getElementById("balance").textContent = balance;
+}
+
+function removeAccounting(index) {
+    let record = accountingRecords[index];
+    if (record.type === "Příjem") {
+        balance -= record.amount;
+    } else {
+        balance += record.amount;
+    }
+    accountingRecords.splice(index, 1);
+    renderAccounting();
+}
+
