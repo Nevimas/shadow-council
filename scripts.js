@@ -1,103 +1,119 @@
-const adminUsername = "admin";
-const adminPassword = "n$gC8rj!3Xp@4Vz2";
+// Starting version
+let version = '1.0.0';
 
-// Funkce pro přihlášení
-function login() {
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
-    const errorMessage = document.getElementById("error-message");
+// Admin credentials
+const adminCredentials = {
+    username: 'admin',
+    password: 'admin1234' // Replace with a strong password
+};
 
-    if (username === adminUsername && password === adminPassword) {
-        window.location.href = "index.html";
+// Handle login submission
+document.getElementById('loginForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    if (username === adminCredentials.username && password === adminCredentials.password) {
+        document.getElementById('login').style.display = 'none';
+        document.getElementById('mainContent').style.display = 'block';
+        loadHomePage();
     } else {
-        errorMessage.style.display = "block";
+        document.getElementById('loginError').style.display = 'block';
     }
+});
+
+// Update version number
+function updateVersion() {
+    version = incrementVersion(version);
+    document.getElementById('version').textContent = 'Verze: ' + version;
 }
 
-// Funkce pro navigaci mezi stránkami
-function navigateTo(page) {
-    window.location.href = page;
+// Increment the version number
+function incrementVersion(version) {
+    let versionParts = version.split('.');
+    versionParts[2] = parseInt(versionParts[2]) + 1;
+    return versionParts.join('.');
 }
 
-// Funkce pro přidání člena
-function addMember() {
-    const name = document.getElementById("new-member-name").value;
-    const rank = document.getElementById("new-member-rank").value;
+// Load different pages based on menu selection
+document.getElementById('homeLink').addEventListener('click', loadHomePage);
+document.getElementById('membersLink').addEventListener('click', loadMembersPage);
+document.getElementById('pointsLink').addEventListener('click', loadPointsPage);
+document.getElementById('accountingLink').addEventListener('click', loadAccountingPage);
 
-    let members = loadData("members");
-    members.push({ name: name, rank: rank, points: 0 });
-    saveData("members", members);
-
-    loadMembers();
+// Content loading functions
+function loadHomePage() {
+    document.getElementById('contentArea').innerHTML = `<h3>Vítejte na Admin Panelu!</h3><p>Tato stránka umožňuje správu členů, bodů a účetnictví.</p>`;
 }
 
-// Funkce pro načtení členů
-function loadMembers() {
-    const members = loadData("members");
-    const membersList = document.getElementById("members-list");
-
-    membersList.innerHTML = "";
-    members.forEach(member => {
-        membersList.innerHTML += `
-            <tr>
-                <td>${member.rank}</td>
-                <td>${member.name}</td>
-                <td>${member.points}</td>
-                <td><button onclick="removeMember('${member.name}')">Smazat</button></td>
-            </tr>
-        `;
-    });
+function loadMembersPage() {
+    document.getElementById('contentArea').innerHTML = `
+        <h3>Seznam Členů a Vedení</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Hodnost</th>
+                    <th>Jméno</th>
+                    <th>Přezdívka</th>
+                    <th>Body</th>
+                    <th>Akce</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Chief of Shadow Council</td>
+                    <td>Nicolas Ackermann</td>
+                    <td>Matthew</td>
+                    <td>100</td>
+                    <td><button onclick="editMember('Nicolas')">Edit</button> <button onclick="removeMember('Nicolas')">Remove</button></td>
+                </tr>
+                <!-- Add other members here -->
+            </tbody>
+        </table>
+        <h3>Historie Bodů</h3>
+        <!-- Form for adding points history goes here -->
+        <button onclick="updateVersion()">Update Version</button>
+    `;
 }
 
-// Funkce pro odstranění člena
-function removeMember(name) {
-    let members = loadData("members");
-    members = members.filter(member => member.name !== name);
-    saveData("members", members);
-
-    loadMembers();
+function loadPointsPage() {
+    document.getElementById('contentArea').innerHTML = `
+        <h3>Bodový Systém</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Seznam členů</th>
+                    <th>Bodová Historie</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Points history goes here -->
+            </tbody>
+        </table>
+    `;
 }
 
-// Funkce pro přidání bodů
-function addPoints() {
-    const name = document.getElementById("member-name").value;
-    const points = parseInt(document.getElementById("points-earned").value);
-    const history = loadData("points-history");
-
-    history.push({
-        name: name,
-        activity: "Aktivita",  // Můžeš upravit dle potřeby
-        points: points,
-        date: new Date().toLocaleDateString()
-    });
-    saveData("points-history", history);
-
-    loadPointsHistory();
+function loadAccountingPage() {
+    document.getElementById('contentArea').innerHTML = `
+        <h3>Účetnictví</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Datum</th>
+                    <th>Typ</th>
+                    <th>Částka</th>
+                    <th>Poznámka</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>20.02. 2025</td>
+                    <td>Příjem</td>
+                    <td>$500,000</td>
+                    <td>Vražda Amy Aria Grivas</td>
+                </tr>
+                <!-- More transactions -->
+            </tbody>
+        </table>
+    `;
 }
-
-// Funkce pro načtení historie bodů
-function loadPointsHistory() {
-    const history = loadData("points-history");
-    const historyTable = document.getElementById("history-table");
-
-    historyTable.innerHTML = "";
-    history.forEach(entry => {
-        historyTable.innerHTML += `
-            <tr>
-                <td>${entry.name}</td>
-                <td>${entry.activity}</td>
-                <td>${entry.points}</td>
-                <td>${entry.date}</td>
-            </tr>
-        `;
-    });
-}
-
-// Funkce pro přidání transakce do účetnictví
-function addTransaction() {
-    const amount = parseFloat(document.getElementById("amount").value);
-    const type = document.getElementById("transaction-type").value;
-    const note = document.getElementById("transaction-note").value;
-    const date = new Date().toLocaleDateString();
-
-    let accountingHistory =
