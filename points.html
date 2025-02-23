@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bodový systém - Shadow Council</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="menu">
+        <button onclick="navigateTo('index.html')">Úvodní stránka</button>
+        <button onclick="navigateTo('leadership.html')">Vedení a členové</button>
+        <button onclick="navigateTo('accounting.html')">Účetnictví</button>
+    </div>
+
+    <h2>Bodový systém</h2>
+    <div id="members-list">
+        <!-- Seznam členů a jejich body -->
+    </div>
+
+    <h3>Historie bodů</h3>
+    <div id="points-history">
+        <table>
+            <thead>
+                <tr>
+                    <th>Jméno</th>
+                    <th>Aktivita</th>
+                    <th>Bodů</th>
+                    <th>Datum</th>
+                </tr>
+            </thead>
+            <tbody id="history-table">
+                <!-- Historie bodů zde -->
+            </tbody>
+        </table>
+        <h3>Přidat bod</h3>
+        <input type="text" id="member-name" placeholder="Jméno člena">
+        <input type="number" id="points-earned" placeholder="Počet bodů">
+        <button onclick="addPoints()">Přidat bod</button>
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html>
