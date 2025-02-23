@@ -1,42 +1,33 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Účetnictví - Shadow Council</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Accounting - Shadow Council</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="menu">
-        <button onclick="navigateTo('index.html')">Úvodní stránka</button>
-        <button onclick="navigateTo('leadership.html')">Vedení a členové</button>
-        <button onclick="navigateTo('points.html')">Bodový systém</button>
+    <div class="menu">
+        <button onclick="location.href='dashboard.html'">Dashboard</button>
+        <button onclick="location.href='members.html'">Members</button>
+        <button onclick="location.href='points.html'">Point System</button>
     </div>
 
-    <h2>Účetnictví</h2>
-    <div id="accounting-list">
-        <table>
-            <thead>
-                <tr>
-                    <th>Datum</th>
-                    <th>Typ</th>
-                    <th>Částka</th>
-                    <th>Poznámka</th>
-                </tr>
-            </thead>
-            <tbody id="accounting-history">
-                <!-- Historie účetních transakcí zde -->
-            </tbody>
-        </table>
-        <h3>Přidat transakci</h3>
-        <input type="number" id="amount" placeholder="Částka" />
-        <select id="transaction-type">
-            <option value="Příjem">Příjem</option>
-            <option value="Výdaj">Výdaj</option>
-        </select>
-        <input type="text" id="transaction-note" placeholder="Poznámka" />
-        <button onclick="addTransaction()">Přidat transakci</button>
-    </div>
-    <script src="scripts.js"></script>
+    <h2>Accounting</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Note</th>
+            </tr>
+        </thead>
+        <tbody id="accounting-list">
+            <!-- Accounting data will go here -->
+        </tbody>
+    </table>
+
+    <script src="accounting.js"></script>
 </body>
 </html>
