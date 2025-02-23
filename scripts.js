@@ -4,7 +4,7 @@ let version = '1.0.0';
 // Admin credentials
 const adminCredentials = {
     username: 'admin',
-    password: 'admin1234' // Replace with a strong password
+    password: 'n$gC8rj!3Xp@4Vz2' // Updated strong password
 };
 
 // Handle login submission
