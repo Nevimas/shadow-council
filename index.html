@@ -73,18 +73,17 @@
                         <th>Body</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Agent</td>
-                        <td>Carlito</td>
-                        <td></td>
-                        <td>Echo-16</td>
-                        <td>02/02/2000</td>
-                        <td>junky8613</td>
-                        <td>10</td>
-                    </tr>
+                <tbody id="members-list">
+                    <!-- Members will be dynamically added here -->
                 </tbody>
             </table>
+            <h2>Přidat člena</h2>
+            <input type="text" id="add-name" placeholder="Jméno">
+            <input type="text" id="add-nickname" placeholder="Přezdívka">
+            <input type="text" id="add-vo" placeholder="Volačka">
+            <input type="date" id="add-birth">
+            <input type="text" id="add-ooc" placeholder="OOC Nick">
+            <button onclick="addMember()">Přidat člena</button>
         </div>
 
         <!-- ACTIVITY -->
@@ -99,21 +98,15 @@
                         <th>Datum</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Danto</td>
-                        <td>Záchrana vedení</td>
-                        <td>10</td>
-                        <td>06/02/2025</td>
-                    </tr>
-                    <tr>
-                        <td>Yella</td>
-                        <td>Záchrana vedení</td>
-                        <td>10</td>
-                        <td>06/02/2025</td>
-                    </tr>
+                <tbody id="activity-list">
+                    <!-- Activity logs will be dynamically added here -->
                 </tbody>
             </table>
+            <h2>Přidat aktivitu</h2>
+            <input type="text" id="add-activity-nickname" placeholder="Přezdívka">
+            <input type="text" id="add-activity-name" placeholder="Aktivita">
+            <input type="number" id="add-activity-points" placeholder="Body">
+            <button onclick="addActivity()">Přidat aktivitu</button>
         </div>
 
         <!-- FINANCE -->
@@ -128,28 +121,22 @@
                         <th>Poznámka</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>20/02/2025</td>
-                        <td>Příjem</td>
-                        <td>$500,000</td>
-                        <td>Vražda Amy Aria Grivas</td>
-                    </tr>
-                    <tr>
-                        <td>20/02/2025</td>
-                        <td>Výdaj</td>
-                        <td>-$24,000</td>
-                        <td>Ilegal SPZky (4x)</td>
-                    </tr>
-                    <tr>
-                        <td>20/02/2025</td>
-                        <td>Výdaj</td>
-                        <td>-$20,000</td>
-                        <td>Půjčka Salko (auto)</td>
-                    </tr>
+                <tbody id="finance-list">
+                    <!-- Financial records will be dynamically added here -->
                 </tbody>
             </table>
+            <h2>Přidat záznam</h2>
+            <input type="date" id="add-finance-date">
+            <select id="add-finance-type">
+                <option value="Příjem">Příjem</option>
+                <option value="Výdaj">Výdaj</option>
+            </select>
+            <input type="number" id="add-finance-amount" placeholder="Částka">
+            <input type="text" id="add-finance-note" placeholder="Poznámka">
+            <button onclick="addFinance()">Přidat záznam</button>
         </div>
+
+        <h2>Aktuální zůstatek: <span id="current-balance">$0</span></h2>
     </div>
 
     <script src="scripts.js"></script>
