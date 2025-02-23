@@ -8,6 +8,7 @@
 </head>
 <body>
     <div id="login-container">
+        <!-- Login panel -->
         <div class="login-container">
             <h2>Admin Login</h2>
             <div class="login-form">
@@ -20,19 +21,46 @@
     </div>
 
     <div id="admin-panel" style="display:none;">
-        <h1>Shadow Council</h1>
-
-        <div id="menu">
-            <button onclick="showSection('members')">Členové</button>
-            <button onclick="showSection('points')">Body</button>
-            <button onclick="showSection('accounting')">Účetnictví</button>
+        <nav>
+            <ul>
+                <li><a href="#leadership-section">Vedení</a></li>
+                <li><a href="#members-section">Členové</a></li>
+                <li><a href="#activity-section">Aktivity</a></li>
+                <li><a href="#finance-section">Účetnictví</a></li>
+            </ul>
+        </nav>
+        <div id="leadership-section">
+            <h1>Vedení</h1>
+            <!-- Table for leadership members -->
+            <table id="leadership-table">
+                <thead>
+                    <tr>
+                        <th>Hodnost</th>
+                        <th>Jméno</th>
+                        <th>Přezdívka</th>
+                        <th>Volačka</th>
+                        <th>Datum narození</th>
+                        <th>OOC Nick</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Example rows; you can add more -->
+                    <tr>
+                        <td>Chief of Shadow Council</td>
+                        <td>Nicolas Ackermann</td>
+                        <td>Matthew</td>
+                        <td>Echo-1</td>
+                        <td>09/03/1995</td>
+                        <td>czipisekk</td>
+                    </tr>
+                    <!-- Add more rows here as needed -->
+                </tbody>
+            </table>
         </div>
 
-        <!-- Sekce pro členy -->
-        <div id="members" style="display:block;">
-            <div class="section-title">
-                <h2>Členové</h2>
-            </div>
+        <div id="members-section">
+            <h1>Členové</h1>
+            <!-- Table for members -->
             <table id="members-table">
                 <thead>
                     <tr>
@@ -45,62 +73,51 @@
                         <th>Body</th>
                     </tr>
                 </thead>
-                <tbody id="members-body">
-                    <!-- Tady se budou přidávat řádky -->
+                <tbody>
+                    <!-- Example rows; you can add more -->
+                    <tr>
+                        <td>Agent</td>
+                        <td>Carlito</td>
+                        <td></td>
+                        <td>Echo-16</td>
+                        <td>02/02/2000</td>
+                        <td>junky8613</td>
+                        <td>10</td>
+                    </tr>
+                    <!-- Add more rows here as needed -->
                 </tbody>
             </table>
-            <form id="add-member-form">
-                <h3>Přidat nového člena</h3>
-                <select id="rank" required>
-                    <option value="Novice">Novice</option>
-                    <option value="Agent">Agent</option>
-                    <option value="Senior Agent">Senior Agent</option>
-                    <option value="Operations Commander">Operations Commander</option>
-                    <option value="Coordinator">Coordinator</option>
-                    <option value="Council Leader">Council Leader</option>
-                </select>
-                <input type="text" id="name" placeholder="Jméno" required>
-                <input type="text" id="nickname" placeholder="Přezdívka" required>
-                <input type="text" id="call-sign" placeholder="Volačka" required>
-                <input type="text" id="dob" placeholder="Datum narození (DD/MM/YYYY)" required>
-                <input type="text" id="ooc-nick" placeholder="OOC Nick" required>
-                <button type="submit">Přidat člena</button>
-            </form>
         </div>
 
-        <!-- Sekce pro body -->
-        <div id="points" style="display:none;">
-            <div class="section-title">
-                <h2>Historie bodů</h2>
-            </div>
-            <table id="points-table">
+        <div id="activity-section">
+            <h1>Aktivity</h1>
+            <!-- Table for activity history -->
+            <table id="activity-table">
                 <thead>
                     <tr>
                         <th>Přezdívka</th>
                         <th>Aktivita</th>
-                        <th>BODY</th>
-                        <th>DATUM</th>
+                        <th>Body</th>
+                        <th>Datum</th>
                     </tr>
                 </thead>
-                <tbody id="points-body">
-                    <!-- Tady se budou přidávat řádky -->
+                <tbody>
+                    <!-- Example rows; you can add more -->
+                    <tr>
+                        <td>Danto</td>
+                        <td>Záchrana vedení</td>
+                        <td>10</td>
+                        <td>06/02/2025</td>
+                    </tr>
+                    <!-- Add more rows here as needed -->
                 </tbody>
             </table>
-            <form id="add-points-form">
-                <h3>Přidat bodovou aktivitu</h3>
-                <input type="text" id="points-nickname" placeholder="Přezdívka" required>
-                <input type="text" id="points-activity" placeholder="Aktivita" required>
-                <input type="number" id="points-value" placeholder="Počet bodů" required>
-                <button type="submit">Přidat bod</button>
-            </form>
         </div>
 
-        <!-- Sekce pro účetnictví -->
-        <div id="accounting" style="display:none;">
-            <div class="section-title">
-                <h2>Účetnictví</h2>
-            </div>
-            <table id="accounting-table">
+        <div id="finance-section">
+            <h1>Účetnictví</h1>
+            <!-- Table for finance -->
+            <table id="finance-table">
                 <thead>
                     <tr>
                         <th>Datum</th>
@@ -109,25 +126,19 @@
                         <th>Poznámka</th>
                     </tr>
                 </thead>
-                <tbody id="accounting-body">
-                    <!-- Historie transakcí zde -->
+                <tbody>
+                    <!-- Example rows; you can add more -->
+                    <tr>
+                        <td>20/02/2025</td>
+                        <td>Příjem</td>
+                        <td>$500,000</td>
+                        <td>Vražda Amy Aria Grivas</td>
+                    </tr>
+                    <!-- Add more rows here as needed -->
                 </tbody>
             </table>
-            <form id="add-accounting-form">
-                <h3>Přidat transakci</h3>
-                <input type="date" id="transaction-date" required>
-                <select id="transaction-type" required>
-                    <option value="Příjem">Příjem</option>
-                    <option value="Výdaj">Výdaj</option>
-                </select>
-                <input type="number" id="transaction-amount" placeholder="Částka" required>
-                <input type="text" id="transaction-note" placeholder="Poznámka" required>
-                <button type="submit">Přidat transakci</button>
-            </form>
-            <div id="balance">
-                <h3>Aktuální zůstatek: $<span id="current-balance">0</span></h3>
-            </div>
         </div>
+
     </div>
 
     <script src="scripts.js"></script>
